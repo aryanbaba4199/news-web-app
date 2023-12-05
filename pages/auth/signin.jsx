@@ -1,28 +1,53 @@
 // Login.js
-import React from 'react';
+import React from "react";
 import Logo from "../../public/logo.png";
-import Image from "next/image"
-import { useState } from 'react';
-import Link from "next/link"
+import Image from "next/image";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+} from "firebase/auth";
+import { useState } from "react";
+import Link from "next/link";
+import { auth, googleProvider } from "./firebase";
+
+
 
 
 const Login = () => {
-    const [email, setemail] = useState("");
-    const [password, setpassword] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [user, setUser] = useState(null);
 
-    const signinHandler = (e) =>{
-        e.preventDefault();
-        console.log("data", email, password);
+  //------------Handling Sign in ----------------
+  const signinHandler = (e) => {
+    e.preventDefault();
+    console.log("data", email, password);
+  };
+
+  // ------------Handling google sign in ----------------
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      const user = auth.currentUser;
+      console.log(user);
+      setUser(user);
+    } catch (error) {
+      console.error("error", error);
     }
+  };
+
+  console.log(user);
+
 
   return (
     <div className="bg-gray-100 min-h-screen grid md:flex items-center justify-center px-0 md:px-40">
       <div className=" bg-white shadow p-8 w-full md:w-1/2">
         <div className="mb-8 flex justify-center">
           <a href="/" className="">
-            <Image 
-            width={60}
-            src={Logo} alt="Logo" />
+            <Image width={60} src={Logo} alt="Logo" />
           </a>
         </div>
         <div className="text-center mb-6">
@@ -31,14 +56,17 @@ const Login = () => {
         <form onSubmit={signinHandler}>
           <div className="space-y-4">
             <div className="space-y-1">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-600">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-600"
+              >
                 Email Address
               </label>
               <div className="relative rounded-md shadow-sm">
                 <input
                   type="text"
                   value={email}
-                  onChange={(e)=>setemail(e.target.value)}
+                  onChange={(e) => setemail(e.target.value)}
                   name="email"
                   className="form-input py-2 px-3 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   placeholder="Email Address"
@@ -46,14 +74,17 @@ const Login = () => {
               </div>
             </div>
             <div className="space-y-1">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-600">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-600"
+              >
                 Password
               </label>
               <div className="relative rounded-md shadow-sm">
                 <input
                   type="password"
                   value={password}
-                  onChange={(e)=>setpassword(e.target.value)}
+                  onChange={(e) => setpassword(e.target.value)}
                   name="password"
                   className="form-input py-2 px-3 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   placeholder="Enter your password"
@@ -73,13 +104,21 @@ const Login = () => {
                 Login Now
               </button>
             </div>
+            <div className="mt-4">
+              <button
+                type="button"
+                onClick={signInWithGoogle}
+                className="w-full inline-flex items-center justify-center px-4 py-2 border border-orange-500 text-base leading-6 font-medium rounded-md text-orange-500 hover:text-orange-600 focus:outline-none focus:border-orange-600 focus:shadow-outline-orange active:text-orange-800 transition duration-150 ease-in-out"
+              >
+                Sign in with Google
+              </button>
+            </div>
             <div className="text-center mt-4">
               <p className="text-gray-500">or</p>
             </div>
             <div className="mt-4">
               <Link
-                href = "/auth/signup"
-                
+                href="/auth/signup"
                 className="w-full inline-flex items-center justify-center px-4 py-2 border border-orange-500 text-base leading-6 font-medium rounded-md text-orange-500 hover:text-orange-600 focus:outline-none focus:border-orange-600 focus:shadow-outline-orange active:text-orange-800 transition duration-150 ease-in-out"
               >
                 Signup Now

@@ -3,6 +3,7 @@ import React from 'react';
 import Logo from "../../public/logo.png";
 import Image from "next/image"
 import { useState } from 'react';
+import Link from "next/link"
 
 
 const Login = () => {
@@ -10,6 +11,8 @@ const Login = () => {
     const [password, setpassword] = useState("");
     const [name, setname] = useState("");
 
+
+    //--------------Handling Sign up -----------
     const signinHandler = (e) =>{
         e.preventDefault();
         console.log("data", email, password);
@@ -37,8 +40,8 @@ const Login = () => {
               <div className="relative rounded-md shadow-sm">
                 <input
                   type="text"
-                  value={email}
-                  onChange={(e)=>setemail(e.target.value)}
+                  value={name}
+                  onChange={(e)=>setname(e.target.value)}
                   name="email"
                   className="form-input py-2 px-3 block w-full leading-5 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   placeholder="Email Address"
@@ -75,29 +78,26 @@ const Login = () => {
                 />
               </div>
             </div>
-            <div className="text-right">
-              <a href="/" className="text-blue-600 text-sm">
-                Forgot Password?
-              </a>
-            </div>
+            
             <div className="mt-4">
               <button
                 type="submit"
                 className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-orange-500 hover:bg-orange-400 focus:outline-none focus:border-orange-600 focus:shadow-outline-orange active:bg-orange-800 transition duration-150 ease-in-out"
               >
-                Login Now
+                Create New Account
               </button>
             </div>
             <div className="text-center mt-4">
               <p className="text-gray-500">or</p>
             </div>
             <div className="mt-4">
-              <button
+              <Link
+                href="/auth/signin"
                 type="button"
                 className="w-full inline-flex items-center justify-center px-4 py-2 border border-orange-500 text-base leading-6 font-medium rounded-md text-orange-500 hover:text-orange-600 focus:outline-none focus:border-orange-600 focus:shadow-outline-orange active:text-orange-800 transition duration-150 ease-in-out"
               >
-                Signup Now
-              </button>
+                Sign In
+              </Link>
             </div>
           </div>
         </form>
