@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 
+.hoverText:hover .absolute {
+    display: block;
+  }

@@ -12,11 +12,13 @@ import {
 import { useState } from "react";
 import Link from "next/link";
 import { auth, googleProvider } from "./firebase";
+import {useRouter} from "next/router";
 
 
 
 
 const Login = () => {
+  const router = useRouter();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [user, setUser] = useState(null);
@@ -24,7 +26,7 @@ const Login = () => {
   //------------Handling Sign in ----------------
   const signinHandler = (e) => {
     e.preventDefault();
-    console.log("data", email, password);
+    
   };
 
   // ------------Handling google sign in ----------------
@@ -33,6 +35,7 @@ const Login = () => {
       await signInWithPopup(auth, googleProvider);
       const user = auth.currentUser;
       console.log(user);
+     
       setUser(user);
     } catch (error) {
       console.error("error", error);
@@ -40,7 +43,9 @@ const Login = () => {
   };
 
   console.log(user);
-
+  if(user){
+    router.push("/");
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen grid md:flex items-center justify-center px-0 md:px-40">

@@ -6,6 +6,8 @@ import { setNews } from '../redux/slice';
 import axios from 'axios';
 import NewsItem from '@/components/News/news';
 
+
+
 const Index = () => {
   const [isGridView, setGridView] = useState(true); // Set default to true for grid view
 
@@ -31,7 +33,12 @@ const Index = () => {
 
   // -------Getting News --------------------
   const newsData = useSelector((state) => state.news.news);
+  
 
+
+
+  
+  
   return (
     <>
       <Navbar />
