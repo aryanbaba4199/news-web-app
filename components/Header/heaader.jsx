@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const heaader = () => {
   return (
-    <div className='w-full h-20 p-4 flex justify-center bg-slate-800 text-white gap-4 font-semibold'>
+    <div className='w-full h-20 p-4 flex overflow-scroll justify-center bg-slate-800 text-white gap-4 font-semibold'>
         <div>
         <Link className='p-1 px-2 hover:bg-blue-600  h-fit  rounded-md' href="/">Home</Link>
         <Link className='p-1 px-2 hover:bg-blue-600  h-fit  rounded-md' href="/">Trending</Link>
