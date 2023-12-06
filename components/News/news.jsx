@@ -6,7 +6,7 @@ import axios from "axios";
 const blankImg = "https://cdn-icons-png.flaticon.com/256/126/126471.png";
 const fillImg = "https://cdn-icons-png.flaticon.com/256/2107/2107845.png";
 
-const NewsDetail = ({ article }) => {
+const NewsDetail = ({ article, isGridView }) => {
   const router = useRouter();
   const [isFavorite, setFavorite] = useState(false);
 
