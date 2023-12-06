@@ -7,7 +7,7 @@ import axios from 'axios';
 import NewsItem from '@/components/News/news';
 
 const Index = () => {
-  const [isGridView, setGridView] = useState(true);
+  const [isGridView, setGridView] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ const Index = () => {
     <>
       <Navbar />
       <div className='container mx-auto px-4 lg:px-8'>
-        <button onClick={() => setGridView(prev => !prev)}>
+        <button className='bg-black text-white p-2 rounded-lg font-semibold' onClick={() => setGridView(prev => !prev)}>
           {isGridView ? 'Switch to List View' : 'Switch to Grid View'}
         </button>
 
