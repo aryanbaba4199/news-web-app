@@ -51,9 +51,9 @@ const Login = () => {
     <div className="bg-gray-100 min-h-screen grid md:flex items-center justify-center px-0 md:px-40">
       <div className=" bg-white shadow p-8 w-full md:w-1/2">
         <div className="mb-8 flex justify-center">
-          <a href="/" className="">
+          <Link href="/" className="">
             <Image width={60} src={Logo} alt="Logo" />
-          </a>
+          </Link>
         </div>
         <div className="text-center mb-6">
           <h2 className="text-xl font-bold">Login into your account</h2>

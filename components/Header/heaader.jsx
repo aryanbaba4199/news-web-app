@@ -5,7 +5,7 @@ import { auth } from "@/pages/auth/firebase";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 
-const heaader = () => {
+const Header = () => {
   const router = useRouter();
 
   // ------------Handling Sign Out --------------------
@@ -32,7 +32,6 @@ const heaader = () => {
             />
           </Link>
         </div>
-        
 
         <div className="w-full  md:flex hidden gap-0 md:gap-4 flex-wrap">
           <Link
@@ -81,4 +80,4 @@ const heaader = () => {
   );
 };
 
-export default heaader;
+export default Header;

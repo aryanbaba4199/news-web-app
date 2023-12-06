@@ -1,7 +1,4 @@
-// NewsDetail.js
-
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { auth } from "@/pages/auth/firebase";
 import axios from "axios";
@@ -28,7 +25,7 @@ const NewsDetail = ({ article }) => {
         } else if (res.status === 201) {
           console.log("Registration Successful");
         } else {
-          console.error("Erron in Stroring user data");
+          console.error("Error in Storing user data");
         }
 
         // -------------saving favorite article in database---------------
@@ -48,27 +45,27 @@ const NewsDetail = ({ article }) => {
       router.push("auth/signin");
     }
   };
+
   return (
     <>
-      <div className="flex items-center justify-center flex-col bg-slate mt-8">
+      <div key={article.source.id} className="flex items-center justify-center flex-col bg-slate mt-8">
         <div className="p-8 rounded-lg max-w-full md:max-w-[90%] flex flex-col justify-center items-center w-full bg-slate-200">
-        <div className="flex w-full">
-          <h2 className="text-2xl font-bold w-[90%] mb-2">{article.title}</h2>
-          {/* Favorite Button  */}
-          <div className="flex justify-end justify-items-end mb-4 h-8 ml-2">
-          <button
-              onClick={() => handleFavorite(article)}
-              className="focus:outline-none "
-            >
-              
-              <img
-                src={isFavorite ? fillImg : blankImg}
-                alt="Favorite"
-                className="w-8 h-8 cursor-pointer"
-              />
-            </button>
+          <div className="flex w-full">
+            <h2 className="text-2xl font-bold w-[90%] mb-2">{article.title}</h2>
+            {/* Favorite Button  */}
+            <div className="flex justify-end justify-items-end mb-4 h-8 ml-2">
+              <button
+                onClick={() => handleFavorite(article)}
+                className="focus:outline-none "
+              >
+                <img
+                  src={isFavorite ? fillImg : blankImg}
+                  alt="Favorite"
+                  className="w-8 h-8 cursor-pointer"
+                />
+              </button>
             </div>
-            </div>
+          </div>
           <p className="text-gray-600 mb-4">{article.description}</p>
           <img
             src={article.urlToImage}
@@ -85,7 +82,6 @@ const NewsDetail = ({ article }) => {
             >
               Read Full Article
             </a>
-            
           </div>
         </div>
       </div>
