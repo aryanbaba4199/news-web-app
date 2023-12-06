@@ -1,3 +1,5 @@
+// NewsDetail.js
+
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -13,10 +15,8 @@ const NewsDetail = ({ article }) => {
 
   // -------------Handling Favorite--------------
   const handleFavorite = async (article) => {
-    console.log(article);
     if (auth) {
-      setFavorite(async(prev) => {
-      if (!prev) {
+      if (!isFavorite) {
         //------------updating user-----------------
         let { email, userId, userName } = "";
         if (auth.currentUser?.displayName) email = auth.currentUser.email;
@@ -33,50 +33,43 @@ const NewsDetail = ({ article }) => {
 
         // -------------saving favorite article in database---------------
 
-        const savingres = await axios.post("/api/favorite", {
+        const savingres = await axios.post(`/api/favorite?id=${"createFav"}`, {
           article,
           userId,
         });
         if (savingres.status === 200) {
+          setFavorite(true);
           console.log("Added to favorites");
         } else {
           console.log("Failed to add to favorites");
         }
       }
-      return !prev;
-    });
     } else {
       router.push("auth/signin");
     }
   };
-
-  
-
   return (
     <>
-      <div className="flex items-center justify-center flex-col bg-slate mt-4">
-        <div className="p-2 rounded-lg max-w-full md:max-w-[90%] flex flex-col justify-center items-center w-full bg-slate-200">
-          <div className="flex justify-end items-end w-full">
-            <h2 className="text-2xl font-bold mb-4 w-[90%]">{article.title}</h2>
-            <div className="w-[10%] flex mb-24 relative hoverText">
-              <button onClick={handleFavorite} className="focus:outline-none">
-                <img
-                  src={isFavorite ? fillImg : blankImg}
-                  alt="Favorite"
-                  className="w-8 h-8 cursor-pointer"
-                />
-              </button>
-
-              {/* Text to show on hover */}
-              <div className="absolute hidden top-0 right-full bg-gray-800 text-white p-2 rounded">
-                Add to Favorite
-              </div>
+      <div className="flex items-center justify-center flex-col bg-slate mt-8">
+        <div className="p-8 rounded-lg max-w-full md:max-w-[90%] flex flex-col justify-center items-center w-full bg-slate-200">
+        <div className="flex w-full">
+          <h2 className="text-2xl font-bold w-[90%] mb-2">{article.title}</h2>
+          {/* Favorite Button  */}
+          <div className="flex justify-end justify-items-end mb-4 h-8 ml-2">
+          <button
+              onClick={() => handleFavorite(article)}
+              className="focus:outline-none "
+            >
+              
+              <img
+                src={isFavorite ? fillImg : blankImg}
+                alt="Favorite"
+                className="w-8 h-8 cursor-pointer"
+              />
+            </button>
             </div>
-          </div>
-
-          <p className="text-gray-600 mb-4 flex flex-wrap">
-            {article.description}
-          </p>
+            </div>
+          <p className="text-gray-600 mb-4">{article.description}</p>
           <img
             src={article.urlToImage}
             className="w-full rounded-lg md:w-2/3 lg:w-1/2 xl:w-1/3 h-auto mb-4"
@@ -92,7 +85,7 @@ const NewsDetail = ({ article }) => {
             >
               Read Full Article
             </a>
-            {/* Favorite Button  */}
+            
           </div>
         </div>
       </div>
