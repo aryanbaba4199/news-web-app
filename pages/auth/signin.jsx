@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { useState } from "react";
 import Link from "next/link";
-import { auth, googleProvider } from "./firebase";
+import { auth, googleProvider } from "../../utils/firebase";
 import {useRouter} from "next/router";
 
 

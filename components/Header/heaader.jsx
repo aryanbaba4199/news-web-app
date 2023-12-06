@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { auth } from "@/pages/auth/firebase";
+import { auth } from "@/utils/firebase";
 import Image from "next/image";
 import logo from "@/public/logo.png";
 

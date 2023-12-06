@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { auth } from "@/pages/auth/firebase";
+import { auth } from "@/utils/firebase";
 import axios from "axios";
 import Nav from "../components/Header/heaader";
 

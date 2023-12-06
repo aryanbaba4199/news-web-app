@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { auth } from "@/pages/auth/firebase";
+import { auth } from "@/utils/firebase";
 import axios from "axios";
 
 const blankImg = "https://cdn-icons-png.flaticon.com/256/126/126471.png";
